@@ -139,7 +139,8 @@ inline void Output2FILE::Output(const std::string& msg)
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__)
 #   if defined (BUILDING_FILELOG_DLL)
-#       define FILELOG_DECLSPEC   __declspec (dllexport)
+// #       define FILELOG_DECLSPEC   __declspec (dllexport)
+#       define FILELOG_DECLSPEC
 #   elif defined (USING_FILELOG_DLL)
 #       define FILELOG_DECLSPEC   __declspec (dllimport)
 #   else
