@@ -38,6 +38,12 @@
 
 namespace vpsc {
 
+class Variable;
+using Variables = std::vector<Variable*>;
+
+class Constraint;
+using Constraints = std::vector<Constraint*>;
+
 //! @brief Indicates the x- or y-dimension.
 enum Dim
 {
@@ -58,45 +64,7 @@ inline Dim conjugate(Dim d)
     return static_cast<Dim>(!d);
 }
 
-/* records the positions and sides through which a particular line intersects
- * with a rectangle
- */
-struct RectangleIntersections
-{
-    bool   intersects, top, bottom, left, right;
-    double topX, topY;
-    double bottomX, bottomY;
-    double leftX, leftY;
-    double rightX, rightY;
-
-    RectangleIntersections()
-        : intersects(false)
-        , top(false)
-        , bottom(false)
-        , left(false)
-        , right(false)
-        , topX(0)
-        , topY(0)
-        , bottomX(0)
-        , bottomY(0)
-        , leftX(0)
-        , leftY(0)
-        , rightX(0)
-        , rightY(0)
-    {
-    }
-
-    int countIntersections()
-    {
-        return left + right + top + bottom;
-    }
-
-    void printIntersections(void);
-
-    // Of the stored intersections, this returns the one closest to the
-    // specified point
-    void nearest(double x, double y, double& xi, double& yi);
-};
+class RectangleIntersections;
 
 /**
  * @brief  A rectangle represents a fixed-size shape in the diagram that may
@@ -410,12 +378,6 @@ private:
 using Rectangles = std::vector<Rectangle*>;
 
 std::ostream& operator<<(std::ostream& os, const vpsc::Rectangle& r);
-
-class Variable;
-using Variables = std::vector<Variable*>;
-
-class Constraint;
-using Constraints = std::vector<Constraint*>;
 
 void generateXConstraints(
     const Rectangles& rs,

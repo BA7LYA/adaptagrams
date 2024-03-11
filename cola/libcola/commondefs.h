@@ -1,7 +1,7 @@
 /*
  * vim: ts=4 sw=4 et tw=0 wm=0
  *
- * libcola - A library providing force-directed network layout using the 
+ * libcola - A library providing force-directed network layout using the
  *           stress-majorization method subject to separation constraints.
  *
  * Copyright (C) 2006-2008  Monash University
@@ -16,7 +16,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
-*/
+ */
 
 #ifndef _COMMONDEFS_H
 #define _COMMONDEFS_H
@@ -25,15 +25,16 @@
 
    Compiler options:
       /Zc:forScope
-*/ 
+*/
 #if defined(_MSC_VER)
 // Microsoft Visual C++ (MS VC) specific code goes here
 #include <float.h>
-#include <malloc.h>     // Contains _alloca
+#include <malloc.h>  // Contains _alloca
 #endif
 
-#include "libvpsc/assertions.h"
 #include <valarray>
+
+#include "libvpsc/assertions.h"
 
 namespace cola {
 
@@ -44,33 +45,51 @@ namespace cola {
  *   Both: resolve in either Horizontal or Vertical direction
  *         depending on which leads to less displacement
  */
-enum NonOverlapConstraintsMode { None, Horizontal, Both };
+enum NonOverlapConstraintsMode
+{
+    None,
+    Horizontal,
+    Both
+};
 
-class FixedList {
+class FixedList
+{
 public:
-    FixedList(const unsigned n) : array(std::valarray<bool>(n)),allFixed(false) 
-    { 
-        array=false; 
+    FixedList(const unsigned n)
+        : array(std::valarray<bool>(n))
+        , allFixed(false)
+    {
+        array = false;
     }
-    void set(const unsigned i, const bool value=true) {
-        COLA_ASSERT(i<array.size());
-        array[i]=value;
+
+    void set(const unsigned i, const bool value = true)
+    {
+        COLA_ASSERT(i < array.size());
+        array[i] = value;
     }
-    bool check(const unsigned i) const {
-        if(allFixed||i>=array.size()) {
+
+    bool check(const unsigned i) const
+    {
+        if (allFixed || i >= array.size())
+        {
             return false;
         }
         return array[i];
     }
-    void unsetAll() {
-        array=false;
+
+    void unsetAll()
+    {
+        array = false;
     }
-    void fixAll(bool val) {
-        allFixed=val;
+
+    void fixAll(bool val)
+    {
+        allFixed = val;
     }
+
 private:
     std::valarray<bool> array;
-    bool allFixed;
+    bool                allFixed;
 };
 
 /*
@@ -78,21 +97,27 @@ private:
  */
 struct delete_object
 {
-  template <typename T>
-  void operator()(T *ptr){ delete ptr;}
+    template<typename T>
+    void operator()(T* ptr)
+    {
+        delete ptr;
+    }
 };
-/* 
+
+/*
  * Sum over the results of calling operation for each member in the
  * iterator.  Handier than std::accumulate because we can use with
  * mem_fun to pass in a getter method.
  */
-template <class InputIterator, class T, class Operation >
+template<class InputIterator, class T, class Operation>
 T sum_over(InputIterator beg, InputIterator end, T init, Operation op)
 {
-    for ( ; beg != end; ++beg)
-    init = init + op(*beg);
+    for (; beg != end; ++beg)
+    {
+        init = init + op(*beg);
+    }
     return init;
 }
-} // namespace cola
+}  // namespace cola
 
 #endif
