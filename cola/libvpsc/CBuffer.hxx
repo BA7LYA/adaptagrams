@@ -16,10 +16,12 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
+ * Author(s):  Tim Dwyer
+ *
  */
 
-#ifndef VPSC_EXCEPTIONS_H
-#define VPSC_EXCEPTIONS_H
+#ifndef VPSC_CBUFFER_H
+#define VPSC_CBUFFER_H
 
 #include <vector>
 
@@ -27,21 +29,33 @@ namespace vpsc {
 
 class Constraint;
 
-struct UnsatisfiableException
+class CBuffer
 {
-    std::vector<Constraint*> path;
-};
-
-struct UnsatisfiedConstraint
-{
-    UnsatisfiedConstraint(Constraint& c)
-        : c(c)
+public:
+    CBuffer(std::vector<Constraint*>& l, const unsigned maxsize = 5)
+        : master_list(l)
+        , maxsize(maxsize)
+        , size(0)
     {
+        buffer.resize(maxsize);
+        load();
     }
 
-    Constraint& c;
+    void reset()
+    {
+        size = 0;
+    }
+
+    void        load();
+    Constraint* mostViolated();
+
+private:
+    std::vector<Constraint*>& master_list;
+    std::vector<Constraint*>  buffer;
+    const unsigned            maxsize;
+    unsigned                  size;
 };
 
 }  // namespace vpsc
 
-#endif  // VPSC_EXCEPTIONS_H
+#endif  // VPSC_CBUFFER_H

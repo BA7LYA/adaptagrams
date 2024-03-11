@@ -16,32 +16,24 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
+ * Author(s):  Tim Dwyer
  */
 
-#ifndef VPSC_EXCEPTIONS_H
-#define VPSC_EXCEPTIONS_H
-
-#include <vector>
+#include "libvpsc/Variable.hxx"
 
 namespace vpsc {
 
-class Constraint;
-
-struct UnsatisfiableException
+std::ostream& operator<<(std::ostream& os, const Variable& v)
 {
-    std::vector<Constraint*> path;
-};
-
-struct UnsatisfiedConstraint
-{
-    UnsatisfiedConstraint(Constraint& c)
-        : c(c)
+    if (v.block)
     {
+        os << "(" << v.id << "=" << v.position() << ")";
     }
-
-    Constraint& c;
-};
+    else
+    {
+        os << "(" << v.id << "=" << v.desiredPosition << ")";
+    }
+    return os;
+}
 
 }  // namespace vpsc
-
-#endif  // VPSC_EXCEPTIONS_H

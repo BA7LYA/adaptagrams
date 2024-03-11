@@ -1,8 +1,9 @@
 /*
  * vim: ts=4 sw=4 et tw=0 wm=0
  *
- * libvpsc - A solver for the problem of Variable Placement with
- *           Separation Constraints.
+ * libproject - Solves an instance of the Variable Placement with Separation
+ *              Constraints problem, that is a projection onto separation
+ *              constraints, whilst always maintaining feasibility.
  *
  * Copyright (C) 2005-2008  Monash University
  *
@@ -18,30 +19,16 @@
  *
  */
 
-#ifndef VPSC_EXCEPTIONS_H
-#define VPSC_EXCEPTIONS_H
+#include "libproject/Util.hxx"
 
-#include <vector>
+#include <cmath>
 
-namespace vpsc {
+namespace project {
 
-class Constraint;
+const double epsilon = 1e-8;
 
-struct UnsatisfiableException
+bool approx_equals(double a, double b)
 {
-    std::vector<Constraint*> path;
-};
-
-struct UnsatisfiedConstraint
-{
-    UnsatisfiedConstraint(Constraint& c)
-        : c(c)
-    {
-    }
-
-    Constraint& c;
-};
-
-}  // namespace vpsc
-
-#endif  // VPSC_EXCEPTIONS_H
+    return fabs(a - b) < epsilon;
+}
+}  // namespace project

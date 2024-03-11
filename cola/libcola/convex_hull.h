@@ -1,7 +1,7 @@
 /*
  * vim: ts=4 sw=4 et tw=0 wm=0
  *
- * libcola - A library providing force-directed network layout using the 
+ * libcola - A library providing force-directed network layout using the
  *           stress-majorization method subject to separation constraints.
  *
  * Copyright (C) 2006-2008  Monash University
@@ -16,16 +16,29 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
-*/
+ */
 
 #ifndef CONVEX_HULL_H
 #define CONVEX_HULL_H
-#include <vector>
+
 #include <valarray>
+#include <vector>
 
 namespace hull {
-void convex(const unsigned n, const double* X, const double* Y, std::vector<unsigned> & hull);
-void convex(const std::valarray<double> & X, const std::valarray<double> & Y, std::vector<unsigned> & hull);
-}
 
-#endif // CONVEX_HULL_H
+void convex(
+    const unsigned         n,
+    const double*          X,
+    const double*          Y,
+    std::vector<unsigned>& hull
+);
+
+void convex(
+    const std::valarray<double>& X,
+    const std::valarray<double>& Y,
+    std::vector<unsigned>&       hull
+);
+
+}  // namespace hull
+
+#endif  // CONVEX_HULL_H

@@ -1,7 +1,7 @@
 /*
  * vim: ts=4 sw=4 et tw=0 wm=0
  *
- * libcola - A library providing force-directed network layout using the 
+ * libcola - A library providing force-directed network layout using the
  *           stress-majorization method subject to separation constraints.
  *
  * Copyright (C) 2006-2008  Monash University
@@ -16,39 +16,45 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
-*/
+ */
 
 #ifndef CONNECTED_COMPONENTS_H
 #define CONNECTED_COMPONENTS_H
-#include "libcola/cola.h"
+
 #include <vector>
 
+#include "libcola/cola.h"
+
 namespace cola {
-// a graph component with a list of node_ids giving indices for some larger list of nodes
-// for the nodes in this component, 
-// and a list of edges - node indices relative to this component
-class Component {
+
+// a graph component with a list of node_ids giving indices for some larger list
+// of nodes for the nodes in this component, and a list of edges - node indices
+// relative to this component
+class Component
+{
 public:
-    std::vector<unsigned> node_ids;
+    std::vector<unsigned>         node_ids;
     std::vector<vpsc::Rectangle*> rects;
-    std::vector<cola::Edge> edges;
-    //CompoundConstraints cx, cy;
+    std::vector<cola::Edge>       edges;
+    // CompoundConstraints cx, cy;
     ~Component();
-    void moveRectangles(double x, double y);
+    void             moveRectangles(double x, double y);
     vpsc::Rectangle* getBoundingBox();
 };
+
 // for a graph of n nodes, return connected components
 void connectedComponents(
-    const std::vector<vpsc::Rectangle*> &rs,
-    const std::vector<cola::Edge> &es,
-    //const CompoundConstraints &cx,
-    //const CompoundConstraints &cy, 
-    std::vector<Component*> &components);
+    const std::vector<vpsc::Rectangle*>& rs,
+    const std::vector<cola::Edge>&       es,
+    // const CompoundConstraints &cx,
+    // const CompoundConstraints &cy,
+    std::vector<Component*>&             components
+);
 
 // move the contents of each component so that the components do not
 // overlap.
-void separateComponents(const std::vector<Component*> &components);
+void separateComponents(const std::vector<Component*>& components);
 
-} // namespace cola
+}  // namespace cola
 
-#endif // CONNECTED_COMPONENTS_H
+#endif  // CONNECTED_COMPONENTS_H

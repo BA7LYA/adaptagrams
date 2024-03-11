@@ -4,7 +4,7 @@
  * libcola - A library providing force-directed network layout using the
  *           stress-majorization method subject to separation constraints.
  *
- * Copyright (C) 2006-2008  Monash University
+ * Copyright (C) 2014  Monash University
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,22 +16,32 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
+ * Author(s):  Michael Wybrow
+ *
  */
 
-#ifndef _CONJUGATE_GRADIENT_H
-#define _CONJUGATE_GRADIENT_H
+#include "libcola/ShapePair.hxx"
 
-#include <valarray>
+#include "libvpsc/assertions.h"
 
-double inner(const std::valarray<double>& x, const std::valarray<double>& y);
+namespace cola {
 
-void conjugate_gradient(
-    const std::valarray<double>& A,
-    std::valarray<double>&       x,
-    const std::valarray<double>& b,
-    const unsigned               n,
-    const double                 tol,
-    const unsigned               max_iterations
-);
+ShapePair::ShapePair(unsigned ind1, unsigned ind2)
+{
+    COLA_ASSERT(ind1 != ind2);
+    // Assign the lesser value to m_index1.
+    m_index1 = (ind1 < ind2) ? ind1 : ind2;
+    // Assign the greater value to m_index2.
+    m_index2 = (ind1 > ind2) ? ind1 : ind2;
+}
 
-#endif  // _CONJUGATE_GRADIENT_H
+bool ShapePair::operator<(const ShapePair& rhs) const
+{
+    if (m_index1 != rhs.m_index1)
+    {
+        return m_index1 < rhs.m_index1;
+    }
+    return m_index2 < rhs.m_index2;
+}
+
+};  // namespace cola

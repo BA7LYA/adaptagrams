@@ -4,7 +4,7 @@
  * libcola - A library providing force-directed network layout using the
  *           stress-majorization method subject to separation constraints.
  *
- * Copyright (C) 2006-2008  Monash University
+ * Copyright (C) 2014  Monash University
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,22 +16,40 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
+ * Author(s):  Michael Wybrow
+ *
  */
 
-#ifndef _CONJUGATE_GRADIENT_H
-#define _CONJUGATE_GRADIENT_H
+#ifndef COLA_SHAPEPAIR_H
+#define COLA_SHAPEPAIR_H
 
-#include <valarray>
+namespace cola {
 
-double inner(const std::valarray<double>& x, const std::valarray<double>& y);
+// A pair of indexes.
+// Specified unordered but stored ordered so it can be compared and
+// stored in a set.
+//
+class ShapePair
+{
+public:
+    ShapePair(unsigned ind1, unsigned ind2);
+    bool operator<(const ShapePair& rhs) const;
 
-void conjugate_gradient(
-    const std::valarray<double>& A,
-    std::valarray<double>&       x,
-    const std::valarray<double>& b,
-    const unsigned               n,
-    const double                 tol,
-    const unsigned               max_iterations
-);
+    unsigned short index1(void) const
+    {
+        return m_index1;
+    }
 
-#endif  // _CONJUGATE_GRADIENT_H
+    unsigned short index2(void) const
+    {
+        return m_index2;
+    }
+
+private:
+    unsigned short m_index1;
+    unsigned short m_index2;
+};
+
+};  // namespace cola
+
+#endif

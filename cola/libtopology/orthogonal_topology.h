@@ -16,8 +16,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * Author: Michael Wybrow
-*/
-
+ */
 
 #ifndef AVOID_ORTHOGLAYOUT_H
 #define AVOID_ORTHOGLAYOUT_H
@@ -26,62 +25,66 @@
 
 namespace topology {
 
-/** 
+/**
  *  @brief  This class can be passed to libavoid to extend it to provide
  *          orthogonal topology improvement functionality.
  *
- *  You should instantiate this class with libcola information about 
- *  constraints on objects in the diagram and pass it to 
+ *  You should instantiate this class with libcola information about
+ *  constraints on objects in the diagram and pass it to
  *  Avoid::Router::setTopologyAddon().
  */
 class AvoidTopologyAddon : public Avoid::TopologyAddonInterface
 {
-    public:
-        /**
-         * @brief Constructs a AvoidTopologyAddon instance for a set of COLA
-         *        diagram constraints.
-         *
-         * Passing libavoid an instance of this class with given libcola 
-         * rectangles, constraints and cluster hierarchy will cause libavoid
-         * to perform a post-processing step after routing where it will 
-         * move nodes to unify unnecessary kinks where this doesn't violate 
-         * constraints on the diagram.
-         *
-         * This information is usually available from an existing libcola
-         * instance.
-         *
-         * @param[in] rs   A vector of vpsc::Rectangle objects subject to the
-         *                 constraints.
-         * @param[in] cs   A set of cola::CompoundConstraint objects to apply
-         *                 to rs.
-         * @param[in] ch   A cola::RootCluster cluster hierarchy specification.
-         * @param[in] map  A cola::VariableIDMap specifying a mapping from
-         *                 the Rectangle indexes in rs to ShapeRef IDs in this
-         *                 libavoid instance.
-         * @param[in] moveLimit  The maximum length of a centre S-bend 
-         *                       connector segments to attempt to improve
-         *                       (default 120.0).
-         */
-        AvoidTopologyAddon(vpsc::Rectangles& rs, cola::CompoundConstraints& cs, 
-                cola::RootCluster *ch, cola::VariableIDMap& map,
-                const double moveLimit = 120);
+public:
+    /**
+     * @brief Constructs a AvoidTopologyAddon instance for a set of COLA
+     *        diagram constraints.
+     *
+     * Passing libavoid an instance of this class with given libcola
+     * rectangles, constraints and cluster hierarchy will cause libavoid
+     * to perform a post-processing step after routing where it will
+     * move nodes to unify unnecessary kinks where this doesn't violate
+     * constraints on the diagram.
+     *
+     * This information is usually available from an existing libcola
+     * instance.
+     *
+     * @param[in] rs   A vector of vpsc::Rectangle objects subject to the
+     *                 constraints.
+     * @param[in] cs   A set of cola::CompoundConstraint objects to apply
+     *                 to rs.
+     * @param[in] ch   A cola::RootCluster cluster hierarchy specification.
+     * @param[in] map  A cola::VariableIDMap specifying a mapping from
+     *                 the Rectangle indexes in rs to ShapeRef IDs in this
+     *                 libavoid instance.
+     * @param[in] moveLimit  The maximum length of a centre S-bend
+     *                       connector segments to attempt to improve
+     *                       (default 120.0).
+     */
+    AvoidTopologyAddon(
+        vpsc::Rectangles&          rs,
+        cola::CompoundConstraints& cs,
+        cola::RootCluster*         ch,
+        cola::VariableIDMap&       map,
+        const double               moveLimit = 120
+    );
 
-        ~AvoidTopologyAddon();
-        Avoid::TopologyAddonInterface *clone(void) const;
+    ~AvoidTopologyAddon();
 
-        void improveOrthogonalTopology(Avoid::Router *router);
-        bool outputCode(FILE *fp) const;
-        bool outputDeletionCode(FILE *fp) const;
+    Avoid::TopologyAddonInterface* clone(void) const;
 
-    private:
-        vpsc::Rectangles m_rectangles;
-        cola::CompoundConstraints m_constraints;
-        cola::RootCluster *m_cluster_hierarchy;
-        cola::VariableIDMap m_id_map;
-        double m_move_limit;
+    void improveOrthogonalTopology(Avoid::Router* router);
+    bool outputCode(FILE* fp) const;
+    bool outputDeletionCode(FILE* fp) const;
+
+private:
+    vpsc::Rectangles          m_rectangles;
+    cola::CompoundConstraints m_constraints;
+    cola::RootCluster*        m_cluster_hierarchy;
+    cola::VariableIDMap       m_id_map;
+    double                    m_move_limit;
 };
 
-
-}
+}  // namespace topology
 
 #endif

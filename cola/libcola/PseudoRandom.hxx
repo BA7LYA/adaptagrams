@@ -4,7 +4,7 @@
  * libcola - A library providing force-directed network layout using the
  *           stress-majorization method subject to separation constraints.
  *
- * Copyright (C) 2006-2008  Monash University
+ * Copyright (C) 2015  Monash University
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,22 +16,30 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
+ * Author(s):  Tim Dwyer
  */
 
-#ifndef _CONJUGATE_GRADIENT_H
-#define _CONJUGATE_GRADIENT_H
+#ifndef COLA_PSEUDORANDOM_H
+#define COLA_PSEUDORANDOM_H
 
-#include <valarray>
+namespace cola {
 
-double inner(const std::valarray<double>& x, const std::valarray<double>& y);
+class PseudoRandom
+{
+public:
+    PseudoRandom(double s = 1);
 
-void conjugate_gradient(
-    const std::valarray<double>& A,
-    std::valarray<double>&       x,
-    const std::valarray<double>& b,
-    const unsigned               n,
-    const double                 tol,
-    const unsigned               max_iterations
-);
+    double getNext(void);
+    double getNextBetween(double min, double max);
 
-#endif  // _CONJUGATE_GRADIENT_H
+private:
+    int          a;
+    int          c;
+    unsigned int m;
+    double       range;
+    unsigned int seed;
+};
+
+}  // namespace cola
+
+#endif  // COLA_PSEUDORANDOM_H
