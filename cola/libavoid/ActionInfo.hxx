@@ -32,22 +32,10 @@
 #include "libavoid/connend.h"
 #include "libavoid/geomtypes.h"
 
-namespace Avoid {
+namespace avoid {
 
 class ShapeRef;
 class JunctionRef;
-
-enum ActionType
-{
-    ShapeMove,
-    ShapeAdd,
-    ShapeRemove,
-    JunctionMove,
-    JunctionAdd,
-    JunctionRemove,
-    ConnChange,
-    ConnectionPinChange
-};
 
 using ConnUpdateList = std::list<std::pair<unsigned int, ConnEnd>>;
 
@@ -89,6 +77,6 @@ public:
 
 using ActionInfoList = std::list<ActionInfo>;
 
-}  // namespace Avoid
+}  // namespace avoid
 
 #endif  // AVOID_ACTIONINFO_H

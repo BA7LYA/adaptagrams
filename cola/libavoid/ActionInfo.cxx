@@ -30,7 +30,7 @@
 #include "libavoid/junction.h"
 #include "libavoid/shape.h"
 
-namespace Avoid {
+namespace avoid {
 
 ActionInfo::ActionInfo(ActionType t, ShapeRef* s, const Polygon& p, bool fM)
     : type(t)
@@ -176,4 +176,4 @@ bool ActionInfo::operator<(const ActionInfo& rhs) const
     }
 }
 
-}  // namespace Avoid
+}  // namespace avoid

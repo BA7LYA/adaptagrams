@@ -326,4 +326,65 @@ ConnRefList Obstacle::attachedConnectors(void) const
     return attachedConns;
 }
 
+void Obstacle::computeVisibilityNaive(void)
+{
+    if (!(router()->InvisibilityGrph))
+    {
+        // Clear shape from graph.
+        removeFromGraph();
+    }
+
+    VertInf* shapeBegin = firstVert();
+    VertInf* shapeEnd   = lastVert()->lstNext;
+
+    VertInf* pointsBegin = router()->vertices.connsBegin();
+    for (VertInf* curr = shapeBegin; curr != shapeEnd; curr = curr->lstNext)
+    {
+        bool knownNew = true;
+
+        db_printf("-- CONSIDERING --\n");
+        curr->id.db_print();
+
+        db_printf("\tFirst Half:\n");
+        for (VertInf* j = pointsBegin; j != curr; j = j->lstNext)
+        {
+            if (j->id == dummyOrthogID)
+            {
+                // Don't include orthogonal dummy vertices.
+                continue;
+            }
+            EdgeInf::checkEdgeVisibility(curr, j, knownNew);
+        }
+
+        db_printf("\tSecond Half:\n");
+        VertInf* pointsEnd = router()->vertices.end();
+        for (VertInf* k = shapeEnd; k != pointsEnd; k = k->lstNext)
+        {
+            if (k->id == dummyOrthogID)
+            {
+                // Don't include orthogonal dummy vertices.
+                continue;
+            }
+            EdgeInf::checkEdgeVisibility(curr, k, knownNew);
+        }
+    }
+}
+
+void Obstacle::computeVisibilitySweep(void)
+{
+    if (!(router()->InvisibilityGrph))
+    {
+        // Clear shape from graph.
+        removeFromGraph();
+    }
+
+    VertInf* startIter = firstVert();
+    VertInf* endIter   = lastVert()->lstNext;
+
+    for (VertInf* i = startIter; i != endIter; i = i->lstNext)
+    {
+        vertexSweep(i);
+    }
+}
+
 }  // namespace Avoid

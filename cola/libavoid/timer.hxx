@@ -27,7 +27,7 @@
 
 #include <ctime>
 
-namespace Avoid {
+namespace avoid {
 
 // #define AVOID_PROFILE
 

@@ -33,18 +33,18 @@
 #include <list>
 #include <set>
 
-#include "libavoid/connectionpin.h"
-#include "libavoid/geometry.h"
+#include "libavoid/geometry.hxx"
+#include "libavoid/ShapeConnectionPin.hxx"
 
-namespace Avoid {
+namespace avoid {
 
-class VertInf;
-class Router;
-class Obstacle;
-using ObstacleList = std::list<Obstacle*>;
 class ConnEnd;
 class ConnRef;
 using ConnRefList = std::list<ConnRef*>;
+class Obstacle;
+using ObstacleList = std::list<Obstacle*>;
+class Router;
+class VertInf;
 
 // @brief   The Obstacle class represents an obstacle that must be
 //          routed around.  Superclass of ShapeRef and JunctionRef.
@@ -142,6 +142,6 @@ protected:
     ShapeConnectionPinSet  m_connection_pins;
 };
 
-}  // namespace Avoid
+}  // namespace avoid
 
 #endif

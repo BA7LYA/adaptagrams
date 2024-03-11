@@ -33,7 +33,7 @@
 #include "libavoid/vertices.h"
 #include "libavoid/visibility.h"
 
-namespace Avoid {
+namespace avoid {
 
 ShapeConnectionPin::ShapeConnectionPin(
     ShapeRef*          shape,
@@ -503,4 +503,4 @@ bool ShapeConnectionPin::operator<(const ShapeConnectionPin& rhs) const
     return false;
 }
 
-}  // namespace Avoid
+}  // namespace avoid

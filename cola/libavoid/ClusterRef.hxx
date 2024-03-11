@@ -30,14 +30,14 @@
 
 #include <list>
 
-#include "libavoid/dllexport.h"
-#include "libavoid/geometry.h"
+#include "libavoid/dllexport.hxx"
+#include "libavoid/geometry.hxx"
 
-namespace Avoid {
+namespace avoid {
 
 class Router;
-class ClusterRef;
 
+class ClusterRef;
 using ClusterRefList = std::list<ClusterRef*>;
 
 //! @brief   The ClusterRef class represents a cluster object.
@@ -92,6 +92,7 @@ public:
     //! @brief  Cluster reference destructor.
     ~ClusterRef();
 #endif
+
     //! @brief   Update the polygon boundary for this cluster.
     //!
     //! You should specify a polygon boundary.  The rectangular one will
@@ -99,21 +100,25 @@ public:
     //!
     //! @param[in]  poly    A Polygon representing the boundary of the
     //!                     cluster.
-    void                setNewPoly(Polygon& poly);
+    void setNewPoly(Polygon& poly);
+
     //! @brief   Returns the ID of this cluster.
     //! @returns The ID of the cluster.
-    unsigned int        id(void) const;
+    unsigned int id(void) const;
+
     //! @brief   Returns a reference to the polygon boundary of this
     //!          cluster.
     //! @returns A reference to the polygon boundary of the cluster.
     ReferencingPolygon& polygon(void);
+
     //! @brief   Returns a reference to the rectangular boundary of this
     //!          cluster.
     //! @returns A reference to the rectangular boundary of the cluster.
-    Polygon&            rectangularPolygon(void);
+    Polygon& rectangularPolygon(void);
+
     //! @brief   Returns a pointer to the router scene this cluster is in.
     //! @returns A pointer to the router scene for this cluster.
-    Router*             router(void) const;
+    Router* router(void) const;
 
     void makeActive(void);
     void makeInactive(void);
@@ -127,6 +132,6 @@ private:
     ClusterRefList::iterator m_clusterrefs_pos;
 };
 
-}  // namespace Avoid
+}  // namespace avoid
 
 #endif

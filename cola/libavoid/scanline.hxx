@@ -28,101 +28,12 @@
 #include <list>
 #include <set>
 
-#include "libavoid/geomtypes.h"
+namespace avoid {
 
-namespace Avoid {
+class Router;
+class ShiftSegmentList;
 
 static const double CHANNEL_MAX = 1'0000'0000;
-
-class Obstacle;
-class VertInf;
-
-// ShiftSegment interface.
-class ShiftSegment
-{
-public:
-    ShiftSegment(const size_t dim)
-        : dimension(dim)
-    {
-    }
-
-    virtual ~ShiftSegment() {}
-
-    virtual Point&       lowPoint(void)        = 0;
-    virtual Point&       highPoint(void)       = 0;
-    virtual const Point& lowPoint(void) const  = 0;
-    virtual const Point& highPoint(void) const = 0;
-    virtual bool overlapsWith(const ShiftSegment* rhs, const size_t dim) const
-        = 0;
-    virtual bool immovable(void) const = 0;
-
-    size_t dimension;
-    double minSpaceLimit;
-    double maxSpaceLimit;
-};
-
-using ShiftSegmentList = std::list<ShiftSegment*>;
-
-class Node;
-
-struct CmpNodePos
-{
-    bool operator()(const Node* u, const Node* v) const;
-};
-
-using NodeSet = std::set<Node*, CmpNodePos>;
-
-class Node
-{
-public:
-    Obstacle*         v;
-    VertInf*          c;
-    ShiftSegment*     ss;
-    double            pos;
-    double            min[2], max[2];
-    Node *            firstAbove, *firstBelow;
-    NodeSet::iterator iter;
-
-    Node(Obstacle* v, const double p);
-    Node(VertInf* c, const double p);
-    Node(ShiftSegment* ss, const double p);
-    virtual ~Node();
-
-    double firstObstacleAbove(size_t dim);
-    double firstObstacleBelow(size_t dim);
-    void   markShiftSegmentsAbove(size_t dim);
-    void   markShiftSegmentsBelow(size_t dim);
-    void   findFirstPointAboveAndBelow(
-          const size_t dim,
-          const double linePos,
-          double&      firstAbovePos,
-          double&      firstBelowPos,
-          double&      lastAbovePos,
-          double&      lastBelowPos
-      );
-    double firstPointAbove(size_t dim);
-    double firstPointBelow(size_t dim);
-    bool   isInsideShape(size_t dimension);
-};
-
-// Note: Open must come first.
-typedef enum
-{
-    Open      = 1,
-    SegOpen   = 2,
-    ConnPoint = 3,
-    SegClose  = 4,
-    Close     = 5
-} EventType;
-
-struct Event
-{
-    Event(EventType t, Node* v, double p);
-
-    EventType type;
-    Node*     v;
-    double    pos;
-};
 
 extern int  compare_events(const void* a, const void* b);
 extern void buildConnectorRouteCheckpointCache(Router* router);
@@ -133,6 +44,6 @@ extern void buildOrthogonalChannelInfo(
     ShiftSegmentList& segmentList
 );
 
-}  // namespace Avoid
+}  // namespace avoid
 
 #endif

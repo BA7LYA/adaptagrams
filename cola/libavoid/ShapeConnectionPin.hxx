@@ -33,11 +33,11 @@
 #include <set>
 #include <utility>
 
-#include "libavoid/connend.h"
-#include "libavoid/dllexport.h"
-#include "libavoid/geomtypes.h"
+#include "libavoid/ConnEnd.hxx"
+#include "libavoid/dllexport.hxx"
+#include "libavoid/geomtypes.hxx"
 
-namespace Avoid {
+namespace avoid {
 
 static const unsigned int CONNECTIONPIN_UNSET  = INT_MAX;
 static const unsigned int CONNECTIONPIN_CENTRE = INT_MAX - 1;
@@ -307,6 +307,6 @@ public:
 
 typedef std::set<ShapeConnectionPin*, CmpConnPinPtr> ShapeConnectionPinSet;
 
-}  // namespace Avoid
+}  // namespace avoid
 
 #endif

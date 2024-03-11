@@ -12,28 +12,26 @@
  * See the file LICENSE.LGPL distributed with the library.
  *
  * Licensees holding a valid commercial license may use this file in
- * accordance with the commercial license agreement provided with the 
+ * accordance with the commercial license agreement provided with the
  * library.
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * Author(s):   Michael Wybrow
-*/
-
+ */
 
 #ifndef AVOID_ORTHOGONAL_H
 #define AVOID_ORTHOGONAL_H
 
-namespace Avoid {
+namespace avoid {
 
 class Router;
 
-extern void generateStaticOrthogonalVisGraph(Router *router);
-extern void improveOrthogonalRoutes(Router *router);
+extern void generateStaticOrthogonalVisGraph(Router* router);
+extern void improveOrthogonalRoutes(Router* router);
 
-
-}
+}  // namespace avoid
 
 #endif
