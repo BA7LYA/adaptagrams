@@ -64,7 +64,10 @@ inline Dim conjugate(Dim d)
 struct RectangleIntersections
 {
     bool   intersects, top, bottom, left, right;
-    double topX, topY, bottomX, bottomY, leftX, leftY, rightX, rightY;
+    double topX, topY;
+    double bottomX, bottomY;
+    double leftX, leftY;
+    double rightX, rightY;
 
     RectangleIntersections()
         : intersects(false)
@@ -89,6 +92,7 @@ struct RectangleIntersections
     }
 
     void printIntersections(void);
+
     // Of the stored intersections, this returns the one closest to the
     // specified point
     void nearest(double x, double y, double& xi, double& yi);

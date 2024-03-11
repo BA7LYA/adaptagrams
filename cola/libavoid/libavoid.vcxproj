@@ -28,23 +28,27 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -164,33 +168,33 @@
     <ClCompile Include="vpsc.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="actioninfo.h" />
-    <ClInclude Include="assertions.h" />
-    <ClInclude Include="connectionpin.h" />
-    <ClInclude Include="connector.h" />
-    <ClInclude Include="connend.h" />
-    <ClInclude Include="debug.h" />
-    <ClInclude Include="dllexport.h" />
-    <ClInclude Include="geometry.h" />
-    <ClInclude Include="geomtypes.h" />
-    <ClInclude Include="graph.h" />
-    <ClInclude Include="hyperedge.h" />
-    <ClInclude Include="hyperedgeimprover.h" />
-    <ClInclude Include="hyperedgetree.h" />
-    <ClInclude Include="junction.h" />
-    <ClInclude Include="libavoid.h" />
-    <ClInclude Include="makepath.h" />
-    <ClInclude Include="mtst.h" />
-    <ClInclude Include="obstacle.h" />
-    <ClInclude Include="orthogonal.h" />
-    <ClInclude Include="router.h" />
-    <ClInclude Include="scanline.h" />
-    <ClInclude Include="shape.h" />
-    <ClInclude Include="timer.h" />
-    <ClInclude Include="vertices.h" />
-    <ClInclude Include="viscluster.h" />
-    <ClInclude Include="visibility.h" />
-    <ClInclude Include="vpsc.h" />
+    <ClInclude Include="Actioninfo.hxx" />
+    <ClInclude Include="assertions.hxx" />
+    <ClInclude Include="connectionpin.hxx" />
+    <ClInclude Include="connector.hxx" />
+    <ClInclude Include="connend.hxx" />
+    <ClInclude Include="debug.hxx" />
+    <ClInclude Include="dllexport.hxx" />
+    <ClInclude Include="geometry.hxx" />
+    <ClInclude Include="geomtypes.hxx" />
+    <ClInclude Include="graph.hxx" />
+    <ClInclude Include="hyperedge.hxx" />
+    <ClInclude Include="hyperedgeimprover.hxx" />
+    <ClInclude Include="hyperedgetree.hxx" />
+    <ClInclude Include="junction.hxx" />
+    <ClInclude Include="libavoid.hxx" />
+    <ClInclude Include="makepath.hxx" />
+    <ClInclude Include="mtst.hxx" />
+    <ClInclude Include="obstacle.hxx" />
+    <ClInclude Include="orthogonal.hxx" />
+    <ClInclude Include="router.hxx" />
+    <ClInclude Include="scanline.hxx" />
+    <ClInclude Include="shape.hxx" />
+    <ClInclude Include="timer.hxx" />
+    <ClInclude Include="vertices.hxx" />
+    <ClInclude Include="viscluster.hxx" />
+    <ClInclude Include="visibility.hxx" />
+    <ClInclude Include="vpsc.hxx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

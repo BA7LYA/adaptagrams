@@ -33,7 +33,7 @@
 #include <string>
 #include <utility>
 
-#include "libavoid/actioninfo.h"
+#include "libavoid/ActionInfo.hxx"
 #include "libavoid/connector.h"
 #include "libavoid/dllexport.h"
 #include "libavoid/graph.h"
@@ -51,16 +51,16 @@ struct LineRep
     Point end;
 };
 
-typedef std::list<LineRep> LineReps;
+using LineReps = std::list<LineRep>;
 
-typedef std::list<unsigned int> IntList;
+using IntList = std::list<unsigned int>;
 
 class ShapeRef;
 class JunctionRef;
 class ClusterRef;
-typedef std::list<ClusterRef*> ClusterRefList;
+using ClusterRefList = std::list<ClusterRef*>;
 class Obstacle;
-typedef std::list<Obstacle*> ObstacleList;
+using ObstacleList = std::list<Obstacle*>;
 class DebugHandler;
 
 //! @brief  Flags that can be passed to the router during initialisation
@@ -296,20 +296,27 @@ enum TransactionPhases
     //! @brief  The orthogonal visibility graph is built by conducting a
     //!         scan in each dimension.  This is the x-dimension.
     TransactionPhaseOrthogonalVisibilityGraphScanX = 1,
+
     //! @brief  The orthogonal visibility graph is built by conducting a
     //!         scan in each dimension.  This is the y-dimension.
     TransactionPhaseOrthogonalVisibilityGraphScanY,
+
     //! @brief  Initial routes are searched for in the visibility graph.
     TransactionPhaseRouteSearch,
+
     //! @brief  With crossing penalties enabled, crossing detection is
     //!         performed to find all crossings.
     TransactionPhaseCrossingDetection,
+
     //! @brief  Crossing connectors are rerouted to search for better routes.
     TransactionPhaseRerouteSearch,
+
     //! @brief  Orthogonal edge segments are nudged apart in the x-dimension.
     TransactionPhaseOrthogonalNudgingX,
+
     //! @brief  Orthogonal edge segments are nudged apart in the y-dimension.
     TransactionPhaseOrthogonalNudgingY,
+
     //! @brief  Not a real phase, but represents the router is finished (or has
     //!         aborted) the transaction and you may interact with is again.
     TransactionPhaseCompleted
